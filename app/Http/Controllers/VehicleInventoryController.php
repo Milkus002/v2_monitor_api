@@ -7,7 +7,21 @@ use Illuminate\Http\Request;
 
 class VehicleInventoryController extends Controller
 {
+    //SI CADA Usuario TIENE MUCHOS VehicleInventory ENTONCES QUEDARIA ASI
+    //tambien tendria que agregar foreinId USER EN Vehicle inventory
     /**
+     * use Illuminate\Routing\Controllers\HasMiddleware
+     * use Illuminate\Routing\Controllers\Middleware
+     * class VehicleInventoryController extends Controller implements HasMiddleware{
+     *      public static function middleware(){
+     *          return[
+     *              new Middleware('auth:sanctum',except:['index','show'])
+     *          ];
+     *      }
+     * }
+     *
+     *
+     /**
      * Display a listing of the resource.
      */
     public function index()
@@ -28,7 +42,14 @@ class VehicleInventoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //SI CADA Usuario TIENE MUCHOS VehicleInventory ENTONCES QUEDARIA ASI
+        /*
+        $fields = $request->validate([
+            'title'=>'required|max:255'
+        ]);
+        $vehicleInventory = $request->user()->vehicleInventory()->create($fields);
+        return $vehicleInventory;
+        */
     }
 
     /**

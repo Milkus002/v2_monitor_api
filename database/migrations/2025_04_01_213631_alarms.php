@@ -11,18 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
-        schema::create('alamrs' , function (Blueprint $table) {
+        Schema::create('alarms', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_device')
-                ->constrained('devices')
+            $table->foreignId('id_device') // Relación con "devices"
+            ->constrained('devices')
                 ->onDelete('cascade');
-            $table->integer('id_type')
-                ->constrained('alarm_types')
-                ->onDelete('cascade');
-            $table->bigInteger('utc');
-            $table->timestamps();
 
+            $table->foreignId('id_type') // Relación con "alarm_types"
+            ->constrained('alarm_types')
+                ->onDelete('cascade');
+
+            $table->bigInteger('utc'); // Guardará el timestamp en formato UNIX
+            $table->timestamps(); // created_at y updated_at automáticos
         });
     }
 
@@ -31,7 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
-        schema::dropIfExists('alamrs');
+        Schema::dropIfExists('alarms');
     }
 };
