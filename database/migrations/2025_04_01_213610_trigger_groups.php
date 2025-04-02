@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         //
-        schema::create('trigger_groups', function (Blueprint $table) {
+        Schema::create('trigger_groups', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_trigger_device')
                 ->constrained('devices')
@@ -30,6 +30,6 @@ return new class extends Migration
     public function down(): void
     {
         //
-        schema::dropIfExists('trigger_groups');
+        Schema::dropIfExists('trigger_groups');
     }
 };

@@ -12,17 +12,19 @@ return new class extends Migration
     public function up(): void
     {
         //
-        schema::create('vsds', function (Blueprint $table) {
+        Schema::create('vsds', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_alarm')
+            $table->foreignId('id_alarm')
+                ->nullable()
                 ->constrained('alarms')
                 ->onDelete('cascade');
             $table->integer('id_event');
             $table->integer('id_target');
-            $table->integer('id_target_type')
+            $table->foreignId('id_target_type')
+                ->nullable()
                 ->constrained('target_types')
                 ->onDelete('cascade');
-            $table->string('image');
+            $table->string('image', 255);
             $table->timestamps();
         });
     }
@@ -33,6 +35,6 @@ return new class extends Migration
     public function down(): void
     {
         //
-        schema::dropIfExists('vsds');
+        Schema::dropIfExists('vsds');
     }
 };

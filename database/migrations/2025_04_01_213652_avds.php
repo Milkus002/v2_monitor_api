@@ -12,14 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         //
-        schema::create('avds', function (Blueprint $table) {
+        Schema::create('avds', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_alarm')
+            $table->foreignId('id_alarm')
                 ->constrained('alarms')
                 ->onDelete('cascade');
             $table->integer('id_event');
-            $table->string('status');
-            $table->string('alarm_type');
+            $table->string('status', 50);
+            $table->string('alarm_type', 50);
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ return new class extends Migration
     public function down(): void
     {
         //
-        schema::dropIfExists('avds');
+        Schema::dropIfExists('avds');
     }
 };

@@ -14,13 +14,13 @@ return new class extends Migration
         //
         Schema::create('generals', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_alarm')
-                ->contrained('alarms')
+            $table->foreignId('id_alarm')
+                ->constrained('alarms')
                 ->onDelete('cascade');
-            $table->integer('id_event');
-            $table->integer('id_target');
-            $table->string('status');
-            $table->string('image');
+            $table->integer('id_event')->nullable();
+            $table->integer('id_target')->nullable();
+            $table->string('status', 50)->nullable();
+            $table->string('image', 255)->nullable();
             $table->timestamps();
         });
     }

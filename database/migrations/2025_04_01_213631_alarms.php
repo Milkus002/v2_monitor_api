@@ -12,12 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         //
-        schema::create('alamrs' , function (Blueprint $table) {
+        Schema::create('alamrs' , function (Blueprint $table) {
             $table->id();
-            $table->integer('id_device')
+            $table->foreignId('id_device')
                 ->constrained('devices')
                 ->onDelete('cascade');
-            $table->integer('id_type')
+            $table->foreignId('id_type')
                 ->constrained('alarm_types')
                 ->onDelete('cascade');
             $table->bigInteger('utc');
@@ -32,6 +32,6 @@ return new class extends Migration
     public function down(): void
     {
         //
-        schema::dropIfExists('alamrs');
+        Schema::dropIfExists('alamrs');
     }
 };

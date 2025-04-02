@@ -14,9 +14,9 @@ return new class extends Migration
 
         Schema::create('devices', function (Blueprint $table) {
             $table->id();
-            $table->string('mac')->unique();
-            $table->string('device_name');
-            $table->string('sn');
+            $table->string('mac', 25)->unique();
+            $table->string('device_name', 50);
+            $table->string('sn', 25);
             $table->foreignId('id_alarm_type')
                 ->constrained('alarm_types')
                 ->onDelete('cascade');
@@ -30,6 +30,6 @@ return new class extends Migration
     public function down(): void
     {
         //
-        schema::dropIfExists('devices');
+        Schema::dropIfExists('devices');
     }
 };

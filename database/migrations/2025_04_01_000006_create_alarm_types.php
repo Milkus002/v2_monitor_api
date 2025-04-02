@@ -12,11 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         //
-        schema::create('alarm_types', function (Blueprint $table) {
+        Schema::create('alarm_types', function (Blueprint $table) {
             $table->id();
-            $table->string('smart_type');
-            $table->string('description');
+            $table->string('smart_type', 25);
+            $table->string('description', 25);
             $table->timestamps();
+
         });
     }
 
@@ -26,6 +27,6 @@ return new class extends Migration
     public function down(): void
     {
         //
-        schema::table('alarm_types', function (Blueprint $table) {});
+        Schema::table('alarm_types', function (Blueprint $table) {});
     }
 };

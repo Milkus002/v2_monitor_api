@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         //
-        schema::create('target_types', function (Blueprint $table) {
+        Schema::create('target_types', function (Blueprint $table) {
             $table->id();
-            $table->string('target_type');
+            $table->string('target_type', 25)->nullable(false);
         });
     }
 
@@ -24,6 +24,6 @@ return new class extends Migration
     public function down(): void
     {
         //
-        schema::dropIfExists('target_types');
+        Schema::dropIfExists('target_types');
     }
 };

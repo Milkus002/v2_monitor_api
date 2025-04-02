@@ -14,19 +14,19 @@ return new class extends Migration
         //
         Schema::create('vsd_persons', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_vsd')
+            $table->foreignId('id_vsd')
                     ->constrained('vsds')
                     ->onDelete('cascade');
-            $table->string('upper_length');
-            $table->string('upper_color');
-            $table->string('skirt');
-            $table->string('shoulderbag');
-            $table->string('sex');
-            $table->string('mask');
-            $table->string('hat');
-            $table->string('glasses');
-            $table->string('backpack');
-            $table->string('age');
+            $table->string('upper_length', 50);
+            $table->string('upper_color', 50);
+            $table->string('skirt', 50);
+            $table->string('shoulderbag', 50);
+            $table->string('sex', 50);
+            $table->string('mask', 50);
+            $table->string('hat', 50);
+            $table->string('glasses', 50);
+            $table->string('backpack', 50);
+            $table->string('age', 50);
             $table->timestamps();
         });
     }
@@ -37,6 +37,6 @@ return new class extends Migration
     public function down(): void
     {
         //
-        schema::table('vsd_persons', function (Blueprint $table) {});
+        Schema::dropIfExists('vsd_persons');
     }
 };

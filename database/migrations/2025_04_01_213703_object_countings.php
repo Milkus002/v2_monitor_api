@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         //
-        schema::create('object_countings', function (Blueprint $table) {
+        Schema::create('object_countings', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_general')
+            $table->foreignId('id_general')
                 ->constrained('generals')
                 ->onDelete('cascade');
             $table->string('object_type');
@@ -30,6 +30,6 @@ return new class extends Migration
     public function down(): void
     {
         //
-        schema::dropIfExists('object_countings');
+        Schema::dropIfExists('object_countings');
     }
 };

@@ -12,16 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         //
-        schema::create('vehicles', function (Blueprint $table) {
+        Schema::create('vehicles', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_alarm')
+            $table->foreignId('id_alarm')
             ->constrained('alarms')
             ->onDelete('cascade');
-            $table->string('plate_number');
-            $table->string('id_car');
-            $table->string('car_color');
-            $table->string('image');
-            $table->string('plate_image');
+            $table->string('plate_number', 50)->nullable();
+            $table->string('id_car', 50)->nullable();
+            $table->string('car_color', 50)->nullable();
+            $table->string('image', 255)->nullable();
+            $table->string('plate_image', 255)->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +32,6 @@ return new class extends Migration
     public function down(): void
     {
         //
-        schema::dropIfExists('vehicles');
+        Schema::dropIfExists('vehicles');
     }
 };
