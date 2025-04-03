@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-//Route::get('/', function () {
+Route::get('/', function () {
+    return 'Hola maribel';
 //    return view('welcome');
-//});
+});

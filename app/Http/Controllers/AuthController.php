@@ -7,20 +7,35 @@ use Illuminate\Http\Request;
 use App\Http\Requests\UserLoginRequest;
 use App\Http\Requests\UserCreateUserRequest;
 use Illuminate\Support\Facades\Hash;
+use function Laravel\Prompts\password;
 
 class AuthController extends Controller
 {
     public function register(UserCreateUserRequest $request){
-        $fields = $request->validated(); // Usa la validación de UserCreateUserRequest
-        $fields['password'] = Hash::make($fields['password']);
+//        $fields = $request->validated(); // Usa la validación de UserCreateUserRequest
+//        $fields['password'] = Hash::make($fields['password']);
+//
+//        $user = User::create($fields);
+//       // $token = $user->createToken($request->name);
+//        $token = $user->createToken('authToken')->plainTextToken;
+//        return response()->json([
+//            'user' => $user,
+//            'token' => $token
+//        ], 201);
 
-        $user = User::create($fields);
-       // $token = $user->createToken($request->name);
-        $token = $user->createToken('authToken')->plainTextToken;
-        return response()->json([
-            'user' => $user,
-            'token' => $token
-        ], 201);
+        $request->validate($request->all());
+        $user = User::create([
+            'name'=>$request->name,
+            'email'=>$request->email,
+            'password'=>Hash::make($request->password),
+
+
+        ]);
+
+        return $this->succes([
+            'user'=>$user,
+            'token'=>$user->createToken('API token of '. $user->name)->plainTextToken
+        ]);
     }
 
     public function login(UserLoginRequest $request){
