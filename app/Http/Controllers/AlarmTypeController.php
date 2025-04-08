@@ -12,15 +12,8 @@ class AlarmTypeController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        $alarmTypes = AlarmType::all();
+        return response()->json($alarmTypes);
     }
 
     /**
@@ -28,7 +21,17 @@ class AlarmTypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string|max:500',
+        ]);
+
+        $alarmType = AlarmType::create($validated);
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $alarmType,
+        ], 201);
     }
 
     /**
@@ -36,15 +39,7 @@ class AlarmTypeController extends Controller
      */
     public function show(AlarmType $alarmType)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(AlarmType $alarmType)
-    {
-        //
+        return response()->json($alarmType);
     }
 
     /**
@@ -52,7 +47,17 @@ class AlarmTypeController extends Controller
      */
     public function update(Request $request, AlarmType $alarmType)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string|max:500',
+        ]);
+
+        $alarmType->update($validated);
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $alarmType,
+        ]);
     }
 
     /**
@@ -60,6 +65,11 @@ class AlarmTypeController extends Controller
      */
     public function destroy(AlarmType $alarmType)
     {
-        //
+        $alarmType->delete();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'AlarmType deleted successfully',
+        ]);
     }
 }
